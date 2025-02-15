@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.2.1"><title>Evento OnInit()</title><meta name="description" content="-"><style>html{margin:0 auto;width:100%;padding:0}body{background-color:#191919;color:#dcdcdc;margin:0 auto;width:98vw;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-size:1rem;height:99vh}*{box-sizing:border-box}main{margin:0 auto;width:100%;padding-left:3.5vw;padding-right:3.5vw;padding-top:5rem;padding-bottom:10rem;background-color:#191919}a{color:#fff;text-decoration:none}a:hover{color:#646464}nav{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #ccc;position:fixed;top:0rem;right:0rem;width:100%;background-color:#191919}nav a{font-size:1.2rem;margin-left:1rem;margin-right:1rem}.toc-button{position:fixed;top:4rem;right:.5rem;background-color:#000000e6;color:#fff;border:none;padding:.5rem 1rem;cursor:pointer;border-radius:5px;z-index:1000}.toc{position:fixed;top:4rem;right:.5rem;width:20rem;max-height:600px;overflow-y:auto;background-color:#000000e6;color:#fff;padding:1rem;border-radius:5px;display:block;z-index:999}.hidden{display:none}.toc ul{list-style:none;padding:0}.toc li{margin:5px 0}.toc a{text-decoration:none;color:#fff}.depth-3{padding-left:30px}.toc a:hover{text-decoration:underline}
+</style></head> <body> <nav> <a href="/trading_for_fun/learn/oninit">Volver</a> <div style="display: flex; gap: 1rem;">Evento OnInit()</div> <a href="https://github.com/Edwar-Sanz" target="_blank">Github</a> </nav> <main> <h1 id="evento-oninit-en-mql5">Evento <code>OnInit</code> en MQL5</h1>
+<h2 id="qué-es-oninit">¿Qué es <code>OnInit</code>?</h2>
+<p>El evento <code>OnInit</code> en MQL5 es una función especial que se ejecuta automáticamente cuando se inicializa un script, un indicador o un asesor experto (Expert Advisor, EA). Se utiliza para realizar configuraciones iniciales, como la asignación de variables, la carga de datos históricos o la configuración de parámetros.</p>
+<h2 id="consideraciones">Consideraciones</h2>
+<ul>
+<li>
+<p>OnInit() solo se ejecuta una vez al inicio del programa.</p>
+</li>
+<li>
+<p>En los Expert Advisors (EAs), si devuelve un valor diferente de INIT_SUCCEEDED, la ejecución se detiene.</p>
+</li>
+<li>
+<p>En los indicadores, permite definir buffers y otras configuraciones iniciales.</p>
+</li>
+</ul>
+<h2 id="sintaxis">Sintaxis</h2>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">(){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">      // Código de inicialización</span></span>
+<span class="line"><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8">(INIT_SUCCEEDED);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<h2 id="ejemplos">Ejemplos</h2>
+<h3 id="ejemplo-1">Ejemplo 1</h3>
+<p>Cuando se ejecuta el script, se imprime “¡Hola Mundo!” en la consola.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"><span style="color:#E1E4E8">	</span></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">(){</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#B392F0">        Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"¡Hola Mundo!"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8">(INIT_SUCCEEDED);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<h3 id="ejemplo-2">Ejemplo 2</h3>
+<p>Cuando se ejecuta el script, se comprueba si los parámetros de entrada son válidos. Si no lo son, se imprime un mensaje de error y se retorna <code>INIT_FAILED</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> ma_period </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8"> ma_shift </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">(){</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (ma_period </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583">  ||</span><span style="color:#E1E4E8"> ma_shift </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">          Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Error: Los inputs no son válidos."</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#E1E4E8"> INIT_FAILED;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8">(INIT_SUCCEEDED);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<h3 id="ejemplo-3">Ejemplo 3</h3>
+<p>Inicializa un indicador de Media Móvil en el gráfico actual y almacena su identificador en ma_handler. Luego, devuelve INIT_SUCCEEDED para indicar que la inicialización fue exitosa.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#E1E4E8"> ma_handler </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    int</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">(){</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">        ma_handler </span><span style="color:#F97583">=</span><span style="color:#B392F0"> iMA</span><span style="color:#E1E4E8">(_Symbol, PERIOD_CURRENT, ma_period, ma_shift, MODE_SMA, PRICE_CLOSE);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        </span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8">(INIT_SUCCEEDED);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span></code></pre> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
+    c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
+    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button>
+    <aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#evento-oninit-en-mql5">Evento OnInit en MQL5</a></li><li class="depth-2"><a href="#qué-es-oninit">¿Qué es OnInit?</a></li><li class="depth-2"><a href="#consideraciones">Consideraciones</a></li><li class="depth-2"><a href="#sintaxis">Sintaxis</a></li><li class="depth-2"><a href="#ejemplos">Ejemplos</a></li><li class="depth-3"><a href="#ejemplo-1">Ejemplo 1</a></li><li class="depth-3"><a href="#ejemplo-2">Ejemplo 2</a></li><li class="depth-3"><a href="#ejemplo-3">Ejemplo 3</a></li></ul></aside><script>
+  document.getElementById("toc-toggle")?.addEventListener("click", function () {
+    document.getElementById("toc").classList.toggle("hidden");
+  });
+</script> </main> </body></html>

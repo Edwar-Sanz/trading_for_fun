@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.2.1"><title>Variables y Operadores</title><meta name="description" content="-"><style>html{margin:0 auto;width:100%;padding:0}body{background-color:#191919;color:#dcdcdc;margin:0 auto;width:98vw;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-size:1rem;height:99vh}*{box-sizing:border-box}main{margin:0 auto;width:100%;padding-left:3.5vw;padding-right:3.5vw;padding-top:5rem;padding-bottom:10rem;background-color:#191919}a{color:#fff;text-decoration:none}a:hover{color:#646464}nav{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #ccc;position:fixed;top:0rem;right:0rem;width:100%;background-color:#191919}nav a{font-size:1.2rem;margin-left:1rem;margin-right:1rem}.toc-button{position:fixed;top:4rem;right:.5rem;background-color:#000000e6;color:#fff;border:none;padding:.5rem 1rem;cursor:pointer;border-radius:5px;z-index:1000}.toc{position:fixed;top:4rem;right:.5rem;width:20rem;max-height:600px;overflow-y:auto;background-color:#000000e6;color:#fff;padding:1rem;border-radius:5px;display:block;z-index:999}.hidden{display:none}.toc ul{list-style:none;padding:0}.toc li{margin:5px 0}.toc a{text-decoration:none;color:#fff}.depth-3{padding-left:30px}.toc a:hover{text-decoration:underline}
+</style></head> <body> <nav> <a href="/trading_for_fun/learn/variables-operadores">Volver</a> <div style="display: flex; gap: 1rem;">Variables y Operadores</div> <a href="https://github.com/Edwar-Sanz" target="_blank">Github</a> </nav> <main> <h1 id="principales-variables-y-operadores-en-mql5">Principales variables y operadores en MQL5</h1>
+<h2 id="variables-en-mql5">Variables en MQL5</h2>
+<h3 id="tipos-de-datos-básicos">Tipos de Datos Básicos</h3>
+<ul>
+<li><code>int</code> (Entero): Números enteros, como <strong>1, 2, -3</strong>.</li>
+<li><code>double</code> (Doble precisión): Números de punto flotante, como <strong>3.14, 2.71</strong>.</li>
+<li><code>bool</code> (Booleano): Solo puede tener valores <strong><code>true</code></strong> o <strong><code>false</code></strong>.</li>
+<li><code>string</code> (Cadena de texto): Almacena texto, como <strong>“Hola Mundo”</strong>.</li>
+</ul>
+<h3 id="tipos-de-datos-compuestos">Tipos de Datos Compuestos</h3>
+<ul>
+<li><code>array</code> (Arreglo): Conjunto de valores del mismo tipo.</li>
+<li><code>struct</code> (Estructura): Grupo de diferentes tipos de variables bajo un mismo nombre.</li>
+</ul>
+<h3 id="3-tipos-de-datos-específicos">3. Tipos de Datos Específicos</h3>
+<ul>
+<li><code>datetime</code>: Representa fecha y hora.</li>
+<li><code>color</code>: Almacena colores en formato RGB.</li>
+<li><code>enum</code>: Define una lista de valores posibles.</li>
+</ul>
+<hr>
+<h2 id="operadores-en-mql5">Operadores en MQL5</h2>
+<h3 id="1-operadores-aritméticos">1. Operadores Aritméticos</h3>
+<ul>
+<li><code>+</code> (Suma)</li>
+<li><code>-</code> (Resta)</li>
+<li><code>*</code> (Multiplicación)</li>
+<li><code>/</code> (División)</li>
+<li><code>%</code> (Módulo)</li>
+</ul>
+<h3 id="2-operadores-relacionales">2. Operadores Relacionales</h3>
+<ul>
+<li><code>==</code> (Igualdad)</li>
+<li><code>!=</code> (Diferente)</li>
+<li><code>></code> (Mayor que)</li>
+<li><code>&#x3C;</code> (Menor que)</li>
+<li><code>>=</code> (Mayor o igual que)</li>
+<li><code>&#x3C;=</code> (Menor o igual que)</li>
+</ul>
+<h3 id="3-operadores-lógicos">3. Operadores Lógicos</h3>
+<ul>
+<li><code>&#x26;&#x26;</code> (AND lógico)</li>
+<li><code>||</code> (OR lógico)</li>
+<li><code>!</code> (Negación lógica)</li>
+</ul>
+<h3 id="4-operadores-de-asignación">4. Operadores de Asignación</h3>
+<ul>
+<li><code>=</code> (Asignación)</li>
+<li><code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code> (Operadores de asignación compuesta)</li>
+</ul>
+<hr>
+<h2 id="ejemplos">Ejemplos</h2>
+<h3 id="ejemplo-1">Ejemplo 1</h3>
+<p>En este ejemplo utilizamos variables de tipo <strong><code>int</code></strong> y <strong><code>double</code></strong> para asignar valores, también utilizamos el operador <strong><code>+</code></strong> para sumar dos valores.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        double</span><span style="color:#E1E4E8"> b </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 5.5</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        double</span><span style="color:#E1E4E8"> suma </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> a </span><span style="color:#F97583">+</span><span style="color:#E1E4E8"> b;</span></span>
+<span class="line"><span style="color:#B392F0">        Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"La suma de a y b es: "</span><span style="color:#E1E4E8">, suma);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<h3 id="ejemplo-2">Ejemplo 2</h3>
+<p>En este ejemplo, utilizamos operadores relacionales y lógicos para comparar dos valores y asignar el resultado a una variable de tipo <code>bool</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> x </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        int</span><span style="color:#E1E4E8"> y </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 15</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">        bool</span><span style="color:#E1E4E8"> resultado </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (x </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> y) </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> (y </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">        Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"El resultado de la comparación es: "</span><span style="color:#E1E4E8">, resultado);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<h3 id="ejemplo-3">Ejemplo 3</h3>
+<p>En este ejemplo, se utiliza un enum para definir los tipos de ordenes posibles. Luego, se utiliza el enum en una variable de tipo <code>OrderType</code> y se compara con el valor <code>BUY</code> para determinar si la orden es de compra o venta.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="c"><code><span class="line"></span>
+<span class="line"><span style="color:#F97583">    enum</span><span style="color:#E1E4E8"> OrderType</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        BUY,</span></span>
+<span class="line"><span style="color:#E1E4E8">        SELL,</span></span>
+<span class="line"><span style="color:#E1E4E8">        PENDING</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    void</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">        OrderType order </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> BUY;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8">(order </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> BUY)</span></span>
+<span class="line"><span style="color:#E1E4E8">        {</span></span>
+<span class="line"><span style="color:#B392F0">            Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Orden de compra seleccionada"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
+    c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
+    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button>
+    <aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#principales-variables-y-operadores-en-mql5">Principales variables y operadores en MQL5</a></li><li class="depth-2"><a href="#variables-en-mql5">Variables en MQL5</a></li><li class="depth-3"><a href="#tipos-de-datos-básicos">Tipos de Datos Básicos</a></li><li class="depth-3"><a href="#tipos-de-datos-compuestos">Tipos de Datos Compuestos</a></li><li class="depth-3"><a href="#3-tipos-de-datos-específicos">3. Tipos de Datos Específicos</a></li><li class="depth-2"><a href="#operadores-en-mql5">Operadores en MQL5</a></li><li class="depth-3"><a href="#1-operadores-aritméticos">1. Operadores Aritméticos</a></li><li class="depth-3"><a href="#2-operadores-relacionales">2. Operadores Relacionales</a></li><li class="depth-3"><a href="#3-operadores-lógicos">3. Operadores Lógicos</a></li><li class="depth-3"><a href="#4-operadores-de-asignación">4. Operadores de Asignación</a></li><li class="depth-2"><a href="#ejemplos">Ejemplos</a></li><li class="depth-3"><a href="#ejemplo-1">Ejemplo 1</a></li><li class="depth-3"><a href="#ejemplo-2">Ejemplo 2</a></li><li class="depth-3"><a href="#ejemplo-3">Ejemplo 3</a></li></ul></aside><script>
+  document.getElementById("toc-toggle")?.addEventListener("click", function () {
+    document.getElementById("toc").classList.toggle("hidden");
+  });
+</script> </main> </body></html>
