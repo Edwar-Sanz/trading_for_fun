@@ -4,9 +4,18 @@
   <h3> Descargar ⬅️</h3>
 </a> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
     c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
-    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button>
-    <aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-2"><a href="#probar-el-bot">Probar el bot</a></li></ul></aside><script>
-  document.getElementById("toc-toggle")?.addEventListener("click", function () {
-    document.getElementById("toc").classList.toggle("hidden");
+    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button><aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-2"><a href="#probar-el-bot">Probar el bot</a></li></ul></aside><script>
+  const toggleButton = document.getElementById("toc-toggle");
+  const toc = document.getElementById("toc");
+
+  toggleButton?.addEventListener("click", function (event) {
+    event.stopPropagation(); // Evita que el evento de clic se propague al document
+    toc.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
+      toc.classList.add("hidden");
+    }
   });
 </script> </main> </body></html>

@@ -97,9 +97,18 @@
 <span class="line"></span>
 <span class="line"></span></code></pre> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
     c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
-    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button>
-    <aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#principales-variables-y-operadores-en-mql5">Principales variables y operadores en MQL5</a></li><li class="depth-2"><a href="#variables-en-mql5">Variables en MQL5</a></li><li class="depth-3"><a href="#tipos-de-datos-básicos">Tipos de Datos Básicos</a></li><li class="depth-3"><a href="#tipos-de-datos-compuestos">Tipos de Datos Compuestos</a></li><li class="depth-3"><a href="#3-tipos-de-datos-específicos">3. Tipos de Datos Específicos</a></li><li class="depth-2"><a href="#operadores-en-mql5">Operadores en MQL5</a></li><li class="depth-3"><a href="#1-operadores-aritméticos">1. Operadores Aritméticos</a></li><li class="depth-3"><a href="#2-operadores-relacionales">2. Operadores Relacionales</a></li><li class="depth-3"><a href="#3-operadores-lógicos">3. Operadores Lógicos</a></li><li class="depth-3"><a href="#4-operadores-de-asignación">4. Operadores de Asignación</a></li><li class="depth-2"><a href="#ejemplos">Ejemplos</a></li><li class="depth-3"><a href="#ejemplo-1">Ejemplo 1</a></li><li class="depth-3"><a href="#ejemplo-2">Ejemplo 2</a></li><li class="depth-3"><a href="#ejemplo-3">Ejemplo 3</a></li></ul></aside><script>
-  document.getElementById("toc-toggle")?.addEventListener("click", function () {
-    document.getElementById("toc").classList.toggle("hidden");
+    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button><aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#principales-variables-y-operadores-en-mql5">Principales variables y operadores en MQL5</a></li><li class="depth-2"><a href="#variables-en-mql5">Variables en MQL5</a></li><li class="depth-3"><a href="#tipos-de-datos-básicos">Tipos de Datos Básicos</a></li><li class="depth-3"><a href="#tipos-de-datos-compuestos">Tipos de Datos Compuestos</a></li><li class="depth-3"><a href="#3-tipos-de-datos-específicos">3. Tipos de Datos Específicos</a></li><li class="depth-2"><a href="#operadores-en-mql5">Operadores en MQL5</a></li><li class="depth-3"><a href="#1-operadores-aritméticos">1. Operadores Aritméticos</a></li><li class="depth-3"><a href="#2-operadores-relacionales">2. Operadores Relacionales</a></li><li class="depth-3"><a href="#3-operadores-lógicos">3. Operadores Lógicos</a></li><li class="depth-3"><a href="#4-operadores-de-asignación">4. Operadores de Asignación</a></li><li class="depth-2"><a href="#ejemplos">Ejemplos</a></li><li class="depth-3"><a href="#ejemplo-1">Ejemplo 1</a></li><li class="depth-3"><a href="#ejemplo-2">Ejemplo 2</a></li><li class="depth-3"><a href="#ejemplo-3">Ejemplo 3</a></li></ul></aside><script>
+  const toggleButton = document.getElementById("toc-toggle");
+  const toc = document.getElementById("toc");
+
+  toggleButton?.addEventListener("click", function (event) {
+    event.stopPropagation(); // Evita que el evento de clic se propague al document
+    toc.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
+      toc.classList.add("hidden");
+    }
   });
 </script> </main> </body></html>

@@ -15,7 +15,17 @@ a{color:#fff;text-decoration:none}a:hover{color:#646464}.searchable-list{width:1
 			});
 		});
 	</script> </div>  <script>
-  document.getElementById("toc-toggle")?.addEventListener("click", function () {
-    document.getElementById("toc").classList.toggle("hidden");
+  const toggleButton = document.getElementById("toc-toggle");
+  const toc = document.getElementById("toc");
+
+  toggleButton?.addEventListener("click", function (event) {
+    event.stopPropagation(); // Evita que el evento de clic se propague al document
+    toc.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
+      toc.classList.add("hidden");
+    }
   });
 </script> </main> </body></html>
