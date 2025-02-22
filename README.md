@@ -1,21 +1,8 @@
-<a href="https://edwar-sanz.github.io/trading_for_fun/" target="_blank">
+# [Inicio](https://edwar-sanz.github.io/trading_for_fun/)
 
-# Inicio
+## [Cómo crear un estrategia y convertirla en un bot de trading](https://edwar-sanz.github.io/trading_for_fun/creating-a-strategy/)
 
-</a>
-<a href="https://edwar-sanz.github.io/trading_for_fun/creating-a-strategy/" target="_blank">
+## [Aprender Mql5](https://edwar-sanz.github.io/trading_for_fun/learn/)
 
-## Cómo crear un estrategia y convertirla en un bot de trading
-
-</a>
-<a href="https://edwar-sanz.github.io/trading_for_fun/learn/" target="_blank">
-
-## Aprender Mql5
-
-</a>
-<a href="https://edwar-sanz.github.io/trading_for_fun/" target="_blank">
-
-## Bots de Trading
-
-</a>
+## [Bots de Trading](https://edwar-sanz.github.io/trading_for_fun/bots/)  
 
