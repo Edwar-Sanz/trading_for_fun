@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/trading_for_fun/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.4.0"><title>.mq5 VS .mqh</title><meta name="description" content="-"><style>html{margin:0 auto;width:100%;padding:0}body{background-color:#191919;color:#dcdcdc;margin:0 auto;width:98vw;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-size:1rem;height:99vh}*{box-sizing:border-box}main{margin:0 auto;width:100%;padding-left:3.5vw;padding-right:3.5vw;padding-top:5rem;padding-bottom:10rem;background-color:#191919}a{color:#fff;text-decoration:none}a:hover{color:#646464}nav{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #ccc;position:fixed;top:0rem;right:0rem;width:100%;background-color:#191919}nav a{font-size:1.2rem;margin-left:1rem;margin-right:1rem}.toc-button{position:fixed;top:4rem;right:.5rem;background-color:#000000e6;color:#fff;border:none;padding:.5rem 1rem;cursor:pointer;border-radius:5px;z-index:1000}.toc{position:fixed;top:4rem;right:.5rem;width:20rem;max-height:600px;overflow-y:auto;background-color:#000000e6;color:#fff;padding:1rem;border-radius:5px;display:block;z-index:999}.hidden{display:none}.toc ul{list-style:none;padding:0}.toc li{margin:5px 0}.toc a{text-decoration:none;color:#fff}.depth-3{padding-left:30px}.toc a:hover{text-decoration:underline}
-</style></head> <body> <nav> <a href="/trading_for_fun/learn">Volver</a> <div style="display: flex; gap: 1rem;"> .mq5 VS .mqh </div> <a href="https://github.com/Edwar-Sanz" target="_blank">Github</a> </nav> <main> <h1 id="archivos-mqh-vs-archivos-mq5">Archivos .mqh vs Archivos .mq5</h1>
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/trading_for_fun/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.4.0"><title>.mq5 VS .mqh</title><meta name="description" content="-"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/trading_for_fun/_astro/ClientRouter.astro_astro_type_script_index_0_lang.-i8LtRhE.js"></script><style>html{margin:0 auto;width:100%;padding:0}body{background-color:#191919;color:#dcdcdc;margin:0 auto;width:98vw;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-size:1rem;height:99vh}*{box-sizing:border-box}main{margin:0 auto;width:100%;padding-left:3.5vw;padding-right:3.5vw;padding-top:5rem;padding-bottom:10rem;background-color:#191919}a{color:#fff;text-decoration:none}a:hover{color:#646464}nav{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #ccc;position:fixed;top:0rem;right:0rem;width:100%;background-color:#191919}nav a{font-size:1.2rem;margin-left:1rem;margin-right:1rem}.toc-button{position:fixed;top:4rem;right:.5rem;background-color:#000000e6;color:#fff;border:none;padding:.5rem 1rem;cursor:pointer;border-radius:5px;z-index:1000}.toc{position:fixed;top:4rem;right:.5rem;width:20rem;max-height:600px;overflow-y:auto;background-color:#000000e6;color:#fff;padding:1rem;border-radius:5px;display:block;z-index:999}.hidden{display:none}.toc ul{list-style:none;padding:0}.toc li{margin:5px 0}.toc a{text-decoration:none;color:#fff}.depth-3{padding-left:30px}.toc a:hover{text-decoration:underline}.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}
+</style></head> <body> <nav> <a href="/trading_for_fun/learn">Volver</a> <div style="display: flex; gap: 1rem;"> .mq5 VS .mqh </div> <div> <a href="https://github.com/Edwar-Sanz" target="_blank">Github</a> </div> </nav> <main> <h1 id="archivos-mqh-vs-archivos-mq5">Archivos .mqh vs Archivos .mq5</h1>
 <p>Existen dos tipos principales de archivos de código fuente: <strong><code>.mqh</code></strong> y <strong><code>.mq5</code></strong>. A continuación, se explica la diferencia entre ellos y su uso.</p>
 <h2 id="archivos-mq5">Archivos <code>.mq5</code></h2>
 <p>Los archivos con extensión <code>.mq5</code> contienen la implementación completa de un programa ejecutable, ya sea un <strong>Asesor Experto (Expert Advisor)</strong>, un <strong>Indicador</strong> o un <strong>Script</strong>, estos se compilan directamente en archivos <code>.ex5</code>, que son los ejecutables utilizados en MetaTrader 5. En los archivos <strong><code>.mq5</code></strong> se importan los importar archivos <code>.mqh</code> para reutilizar código y mejorar la modularidad.</p>
@@ -39,17 +39,27 @@
 </ul> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
     c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
     c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button><aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#archivos-mqh-vs-archivos-mq5">Archivos .mqh vs Archivos .mq5</a></li><li class="depth-2"><a href="#archivos-mq5">Archivos .mq5</a></li><li class="depth-2"><a href="#archivos-mqh">Archivos .mqh</a></li><li class="depth-2"><a href="#ejemplo">Ejemplo</a></li><li class="depth-3"><a href="#en-el-archivo-mqh">En el archivo .mqh:</a></li><li class="depth-3"><a href="#incluimos-el-archivo-mqh-en-el-archivo-mq5">Incluimos el archivo .mqh en el archivo .mq5:</a></li><li class="depth-2"><a href="#conclusión">Conclusión</a></li></ul></aside><script>
-  const toggleButton = document.getElementById("toc-toggle");
-  const toc = document.getElementById("toc");
+  function initTOC() {
+    const toggleButton = document.getElementById("toc-toggle");
+    const toc = document.getElementById("toc");
 
-  toggleButton?.addEventListener("click", function (event) {
-    event.stopPropagation(); // Evita que el evento de clic se propague al document
-    toc.classList.toggle("hidden");
-  });
+    if (!toggleButton || !toc) return; // Evita errores si los elementos no existen en la página
 
-  document.addEventListener("click", function (event) {
-    if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
-      toc.classList.add("hidden");
-    }
-  });
+    toggleButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      toc.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
+        toc.classList.add("hidden");
+      }
+    });
+  }
+
+  // Ejecutar al cargar la página
+  initTOC();
+
+  // Volver a ejecutar después de cada transición
+  document.addEventListener("astro:after-swap", initTOC);
 </script> </main> </body></html>
