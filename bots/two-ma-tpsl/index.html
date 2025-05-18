@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/trading_for_fun/favicon.svg"><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.7.13"><title>Cruce de medias móviles</title><meta name="description" content="-"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/trading_for_fun/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><style>html{margin:0 auto;width:100%;padding:0}body{background-color:#191919;color:#dcdcdc;margin:0 auto;width:98vw;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";font-size:1rem;height:99vh}*{box-sizing:border-box}main{margin:0 auto;width:100%;padding-left:3.5vw;padding-right:3.5vw;padding-top:5rem;padding-bottom:10rem;background-color:#191919}a{color:#fff;text-decoration:none}a:hover{color:#646464}nav{display:flex;justify-content:space-between;align-items:center;padding:1rem;border-bottom:1px solid #ccc;position:fixed;top:0rem;right:0rem;width:100%;background-color:#191919}nav a{font-size:1.2rem;margin-left:1rem;margin-right:1rem}.toc-button{position:fixed;top:4rem;right:.5rem;background-color:#000000e6;color:#fff;border:none;padding:.5rem 1rem;cursor:pointer;border-radius:5px;z-index:1000}.toc{position:fixed;top:4rem;right:.5rem;width:20rem;max-height:600px;overflow-y:auto;background-color:#000000e6;color:#fff;padding:1rem;border-radius:5px;display:block;z-index:999}.hidden{display:none}.toc ul{list-style:none;padding:0}.toc li{margin:5px 0}.toc a{text-decoration:none;color:#fff}.depth-3{padding-left:30px}.toc a:hover{text-decoration:underline}.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}
+</style></head> <body> <nav> <a href="/trading_for_fun/bots" id="backLink">Volver</a> <div style="display: flex; gap: 1rem;" id="navTitle"> Cruce de medias móviles </div> <div> <a href="https://github.com/Edwar-Sanz" target="_blank" id="githubLink">Github</a> </div> </nav> <main> <h1 id="cruce-de-dos-medias-móviles-con-take-profit-y-stop-loss">Cruce de dos medias móviles con take profit y stop loss</h1>
+<p>La señal para operar se produce cuando una media móvil rápida cruza la lenta.
+La operación se cierra cuando se alcanza el take profit o el stop loss.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="cpp"><code><span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#F97583">  #include</span><span style="color:#9ECBFF"> &#x3C;Trade/Trade.mqh></span></span>
+<span class="line"><span style="color:#F97583">  #include</span><span style="color:#9ECBFF"> "..\\..\\Tools.mqh"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Configuración de inputs</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8">    TP </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 1000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8">    SL </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 100</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">double</span><span style="color:#E1E4E8"> VL </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8">    ma_fast_period </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8">    ma_slow_period </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 20</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input </span><span style="color:#F97583">int</span><span style="color:#E1E4E8">    ma_shift       </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input string initStartTime  </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "01:00:00"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  input string initEndTime    </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "22:59:00"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Variables globales</span></span>
+<span class="line"><span style="color:#F97583">  double</span><span style="color:#E1E4E8">     ma_fast_vals[];</span></span>
+<span class="line"><span style="color:#F97583">  double</span><span style="color:#E1E4E8">     ma_slow_vals[];</span></span>
+<span class="line"><span style="color:#F97583">  int</span><span style="color:#E1E4E8">        ma_fast_handle </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  int</span><span style="color:#E1E4E8">        ma_slow_handle </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  datetime   lastCandleTime </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#F97583">  int</span><span style="color:#B392F0"> OnInit</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#B392F0">InitMovingAverages</span><span style="color:#E1E4E8">()) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> INIT_FAILED;</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> INIT_SUCCEEDED;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> OnTick</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#B392F0">UpdateMarketData</span><span style="color:#E1E4E8">()) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">t_IsTheSameCandle</span><span style="color:#E1E4E8">(lastCandleTime) </span><span style="color:#F97583">||</span><span style="color:#F97583"> !</span><span style="color:#B392F0">t_IsTimeToTrade</span><span style="color:#E1E4E8">(initStartTime, initEndTime)) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      TypeOperationEnum op </span><span style="color:#F97583">=</span><span style="color:#B392F0"> GetSignal</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (op </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> none </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#B392F0"> PositionsTotal</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">          ExecuteTrade</span><span style="color:#E1E4E8">(op);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      lastCandleTime </span><span style="color:#F97583">=</span><span style="color:#B392F0"> iTime</span><span style="color:#E1E4E8">(_Symbol, PERIOD_CURRENT, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Inicialización de MAs</span></span>
+<span class="line"><span style="color:#F97583">  bool</span><span style="color:#B392F0"> InitMovingAverages</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (ma_fast_period </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> ma_slow_period </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">          Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Error: ma_fast_period y ma_slow_period deben ser mayores que 0"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">      ma_fast_handle </span><span style="color:#F97583">=</span><span style="color:#B392F0"> iMA</span><span style="color:#E1E4E8">(_Symbol, PERIOD_CURRENT, ma_fast_period, ma_shift, MODE_SMA, PRICE_CLOSE);</span></span>
+<span class="line"><span style="color:#E1E4E8">      ma_slow_handle </span><span style="color:#F97583">=</span><span style="color:#B392F0"> iMA</span><span style="color:#E1E4E8">(_Symbol, PERIOD_CURRENT, ma_slow_period, ma_shift, MODE_SMA, PRICE_CLOSE);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (ma_fast_handle </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> INVALID_HANDLE </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> ma_slow_handle </span><span style="color:#F97583">==</span><span style="color:#E1E4E8"> INVALID_HANDLE) {</span></span>
+<span class="line"><span style="color:#B392F0">          Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Error al crear los handlers de MA"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">      ArraySetAsSeries</span><span style="color:#E1E4E8">(ma_fast_vals, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">      ArraySetAsSeries</span><span style="color:#E1E4E8">(ma_slow_vals, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Copia datos de las dos MAs</span></span>
+<span class="line"><span style="color:#F97583">  bool</span><span style="color:#B392F0"> UpdateMarketData</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ask </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SymbolInfoDouble</span><span style="color:#E1E4E8">(_Symbol, SYMBOL_ASK);</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> bid </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SymbolInfoDouble</span><span style="color:#E1E4E8">(_Symbol, SYMBOL_BID);</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (ask </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span><span style="color:#E1E4E8"> bid </span><span style="color:#F97583">==</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">CopyBuffer</span><span style="color:#E1E4E8">(ma_fast_handle, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, ma_fast_vals) </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#B392F0">          CopyBuffer</span><span style="color:#E1E4E8">(ma_slow_handle, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">, ma_slow_vals) </span><span style="color:#F97583">&#x3C;=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">          Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Error al copiar datos de MA"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Cruce de MAs: Señal de compra si MA rápida cruza hacia arriba la lenta</span></span>
+<span class="line"><span style="color:#B392F0">  TypeOperationEnum</span><span style="color:#B392F0"> GetSignal</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">ArraySize</span><span style="color:#E1E4E8">(ma_fast_vals) </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 2</span><span style="color:#F97583"> ||</span><span style="color:#B392F0"> ArraySize</span><span style="color:#E1E4E8">(ma_slow_vals) </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> none;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ma_fast_prev </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ma_fast_vals[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ma_fast_curr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ma_fast_vals[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ma_slow_prev </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ma_slow_vals[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ma_slow_curr </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ma_slow_vals[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (ma_fast_prev </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> ma_slow_prev </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> ma_fast_curr </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> ma_slow_curr) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> buy;</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (ma_fast_prev </span><span style="color:#F97583">></span><span style="color:#E1E4E8"> ma_slow_prev </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> ma_fast_curr </span><span style="color:#F97583">&#x3C;</span><span style="color:#E1E4E8"> ma_slow_curr) </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> sell;</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> none;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //+------------------------------------------------------------------+</span></span>
+<span class="line"><span style="color:#6A737D">  // Ejecutar orden</span></span>
+<span class="line"><span style="color:#F97583">  void</span><span style="color:#B392F0"> ExecuteTrade</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">TypeOperationEnum</span><span style="color:#FFAB70"> op</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> ask </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SymbolInfoDouble</span><span style="color:#E1E4E8">(_Symbol, SYMBOL_ASK);</span></span>
+<span class="line"><span style="color:#F97583">      double</span><span style="color:#E1E4E8"> bid </span><span style="color:#F97583">=</span><span style="color:#B392F0"> SymbolInfoDouble</span><span style="color:#E1E4E8">(_Symbol, SYMBOL_BID);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">      switch</span><span style="color:#E1E4E8"> (op) {</span></span>
+<span class="line"><span style="color:#F97583">          case</span><span style="color:#E1E4E8"> buy:</span></span>
+<span class="line"><span style="color:#B392F0">              Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Signal: Buy"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">              t_BuySymbol</span><span style="color:#E1E4E8">(VL, SL, TP, ask);</span></span>
+<span class="line"><span style="color:#F97583">              break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">          case</span><span style="color:#E1E4E8"> sell:</span></span>
+<span class="line"><span style="color:#B392F0">              Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Signal: Sell"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">              t_SellSymbol</span><span style="color:#E1E4E8">(VL, SL, TP, bid);</span></span>
+<span class="line"><span style="color:#F97583">              break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">          default</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#B392F0">              Print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"Signal: None"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre> <button id="toc-toggle" class="toc-button"><svg fill="#ffffff" height="20px" width="20px" viewBox="0 0 330 330" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"> <path d="M229.966,0.847c-6.011-2.109-12.698-0.19-16.678,4.784L93.288,155.635 
+    c-4.382,5.478-4.382,13.263,0.001,18.741l120,149.996c2.902,3.628,7.245,5.63,11.716,5.63c1.658,0,3.336-0.276,4.962-0.847 
+    c6.012-2.108,10.035-7.784,10.035-14.154v-300C240.001,8.63,235.978,2.955,229.966,0.847z"></path> </svg></button><aside id="toc" class="toc hidden"><h3>Contenidos</h3><ul><li class="depth-1"><a href="#cruce-de-dos-medias-móviles-con-take-profit-y-stop-loss">Cruce de dos medias móviles con take profit y stop loss</a></li></ul></aside><script>
+  function initTOC() {
+    const toggleButton = document.getElementById("toc-toggle");
+    const toc = document.getElementById("toc");
+
+    if (!toggleButton || !toc) return; // Evita errores si los elementos no existen en la página
+
+    toggleButton.addEventListener("click", function (event) {
+      event.stopPropagation();
+      toc.classList.toggle("hidden");
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!toc.contains(event.target) && !toggleButton.contains(event.target)) {
+        toc.classList.add("hidden");
+      }
+    });
+  }
+
+  // Ejecutar al cargar la página
+  initTOC();
+
+  // Volver a ejecutar después de cada transición
+  document.addEventListener("astro:after-swap", initTOC);
+</script> </main> </body></html>
